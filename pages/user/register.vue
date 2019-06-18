@@ -7,7 +7,7 @@
 		<view class="wrapper">
 			<view class="left-top-sign">LOGIN</view>
 			<view class="welcome">
-				欢迎回来！
+				欢迎注册！
 			</view>
 			<view class="input-content">
 				<view class="input-item">
@@ -32,18 +32,11 @@
 						password 
 						data-key="password"
 						@input="inputChange"
-						@confirm="toLogin"
+						@confirm="toRegister"
 					/>
 				</view>
 			</view>
-			<button class="confirm-btn" @click="toLogin" :disabled="logining">登录</button>
-			<view class="forget-section">
-				忘记密码?
-			</view>
-		</view>
-		<view class="register-section">
-			还没有账号?
-			<text @click="toRegist">马上注册</text>
+			<button class="confirm-btn" @click="toRegister" :disabled="logining">注册</button>
 		</view>
 	</view>
 </template>
@@ -57,8 +50,7 @@
 		data(){
 			return {
 				mobile: '',
-				password: '',
-				logining: false,
+				password: ''
 			}
 		},
 		onLoad(){
@@ -73,11 +65,10 @@
 			navBack(){
 				uni.navigateBack();
 			},
-			toRegist(){
-				// this.$api.msg('去注册');
-				uni.navigateTo({url: '/pages/user/register'});
+			page(){
+				
 			},
-			async toLogin(){
+			async toRegister(){
 				this.logining = true;
 				const {mobile, password} = this;
 				/* 数据验证模块
@@ -89,16 +80,10 @@
 					return;
 				}*/
 				
-				// const sendData = {
-				// 	mobile,
-				// 	password
-				// };
-				// const result = await this.$api.json('userInfo');
-				
 				let headers = {};
 				uni.request({
 				  // url: this.$url + '/renren-api/api/login',//此处使用了全局变量拼接url（main.js文件中），关于全局变量官方问答里有
-					url: 'http://106.15.235.217:8001/renren-api/api/login', //仅为示例，并非真实接口地址。
+					url: 'http://106.15.235.217:8001/renren-api/api/register', //仅为示例，并非真实接口地址。
 					method: 'POST',//get或post
 					headers: headers,
 					data: {
@@ -110,17 +95,10 @@
 						//返回的基本信息做本地缓存
 						let data = result.data;
 						if (data.code === 0) {									
-							this.login(result.data);	
-							uni.navigateBack();  							
-							// this.$store.commit('update',['isLogin',true]);
-							uni.setStorageSync('token', data.token);							
-							this.$api.msg('登录成功');
-							
+							this.$api.msg('注册成功');
+							uni.navigateBack();
 						} else {
-							uni.removeStorageSync('token');							
-							// this.$api.msg(result.msg);
-							this.$api.msg('手机号或密码错误');
-							this.logining = false;
+							this.$api.msg(result.data.msg);
 						}
 					},
 					fail: () => {
@@ -130,16 +108,6 @@
 					},
 					complete: () => {},			   
 				});	
-				
-				
-				// 
-				// if(result.status === 1){
-				// 	this.login(result.data);
-    //                 uni.navigateBack();  
-				// }else{
-				// 	this.$api.msg(result.msg);
-				// 	this.logining = false;
-				// }
 			}
 		},
 

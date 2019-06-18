@@ -77,6 +77,26 @@
 				}
 			}
 		}, {
+			"path": "pages/public/login2",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-bottom"
+				}
+			}
+		},{
+			"path": "pages/user/register",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-bottom"
+				}
+			}
+		},{
 			"path": "pages/user/user",
 			"style": {
 				"navigationBarTitleText": "我的",
