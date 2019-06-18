@@ -74,7 +74,6 @@
 				uni.navigateBack();
 			},
 			toRegist(){
-				// this.$api.msg('去注册');
 				uni.navigateTo({url: '/pages/user/register'});
 			},
 			async toLogin(){
@@ -117,7 +116,7 @@
 							this.$api.msg('登录成功');
 							
 						} else {
-							uni.removeStorageSync('token');							
+							uni.removeStorageSync('token');	
 							// this.$api.msg(result.msg);
 							this.$api.msg('手机号或密码错误');
 							this.logining = false;
