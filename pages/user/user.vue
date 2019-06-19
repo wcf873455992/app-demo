@@ -1,7 +1,7 @@
 <template>  
     <view class="container">  
 		
-		<view class="user-section" @click="navTo('/pages/userinfo/userinfo')" >
+		<view class="user-section" @click="navTo('/pages/user/userinfo')" >
 			<image class="bg" src="/static/user-bg.jpg"></image>
 			<view class="user-info-box">
 				<view class="portrait-box">
@@ -12,18 +12,7 @@
 					<text class="username">{{userInfo.username || '游客'}}</text>
 				</view>
 			</view>
-			<!-- <view class="vip-card-box">
-				<image class="card-bg" src="/static/vip-card-bg.png" mode=""></image>
-				<view class="b-btn">
-					立即开通
-				</view>
-				<view class="tit">
-					<text class="yticon icon-iLinkapp-"></text>
-					DCloud会员
-				</view>
-				<text class="e-m">DCloud Union</text>
-				<text class="e-b">开通会员开发无bug 一测就上线</text>
-			</view> -->
+			
 		</view>
 		
 		<view 
@@ -38,20 +27,6 @@
 		>
 			<image class="arc" src="/static/arc.png"></image>
 			
-			<!-- <view class="tj-sction">
-				<view class="tj-item">
-					<text class="num">128.8</text>
-					<text>余额</text>
-				</view>
-				<view class="tj-item">
-					<text class="num">0</text>
-					<text>优惠券</text>
-				</view>
-				<view class="tj-item">
-					<text class="num">20</text>
-					<text>积分</text>
-				</view>
-			</view> -->
 			<!-- 订单 -->
 			<view class="order-section">
 				<view class="order-item" @click="navTo('/pages/order/order?state=0')" hover-class="common-hover"  :hover-stay-time="50">
@@ -73,20 +48,9 @@
 			</view>
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
-				<!-- <view class="sec-header">
-					<text class="yticon icon-lishijilu"></text>
-					<text>浏览历史</text>
-				</view> -->
-				<!-- <scroll-view scroll-x class="h-list">
-					<image @click="navTo('/pages/product/product')" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105186633&di=c121a29beece4e14269948d990f9e720&imgtype=0&src=http%3A%2F%2Fimg004.hc360.cn%2Fm8%2FM04%2FDE%2FDE%2FwKhQplZ-QteEBvsbAAAAADUkobU751.jpg" mode="aspectFill"></image>
-					<image @click="navTo('/pages/product/product')" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105231218&di=09534b9833b5243296630e6d5b728eff&imgtype=0&src=http%3A%2F%2Fimg002.hc360.cn%2Fm1%2FM05%2FD1%2FAC%2FwKhQcFQ3iN2EQTo8AAAAAHQU6_8355.jpg" mode="aspectFill"></image>
-					<image @click="navTo('/pages/product/product')" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105320890&di=c743386be51f2c4c0fd4b75754d14f3c&imgtype=0&src=http%3A%2F%2Fimg007.hc360.cn%2Fhb%2FMTQ1OTg4ODY0MDA3Ny05OTQ4ODY1NDQ%3D.jpg" mode="aspectFill"></image>
-					<image @click="navTo('/pages/product/product')" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2691146630,2165926318&fm=26&gp=0.jpg" mode="aspectFill"></image>
-					<image @click="navTo('/pages/product/product')" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105443324&di=8141bf13f3f208c61524d67f9bb83942&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01ac9a5548d29b0000019ae98e6d98.jpg" mode="aspectFill"></image>
-					<image @click="navTo('/pages/product/product')" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=191678693,2701202375&fm=26&gp=0.jpg" mode="aspectFill"></image>
-				</scroll-view> -->
-				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" title="我的订单" tips=" "></list-cell>
-				<list-cell icon="icon-dizhi" iconColor="#5fcda2" title="房间管理" @eventClick="navTo('/pages/address/address')"></list-cell>
+				
+				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" title="我的订单" @eventClick="navTo('/pages/office/Office')"></list-cell>
+				<list-cell icon="icon-dizhi" iconColor="#5fcda2" title="房间管理" @eventClick="navTo('/pages/user/room')"></list-cell>
 				<!-- <list-cell icon="icon-share" iconColor="#9789f7" title="分享" tips="邀请好友赢10万大礼"></list-cell> -->
 				<!-- <list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="晒单" tips="晒单抢红包"></list-cell> -->
 				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="我的收藏"></list-cell>

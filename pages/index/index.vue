@@ -6,233 +6,26 @@
 			<input class="ser-input" type="text" value="输入关键字搜索" disabled />
 		</view>
 		<!-- #endif -->
-		
-		<!-- 头部轮播 -->
-		<view class="carousel-section">
-			<!-- 标题栏和状态栏占位符 -->
-			<view class="titleNview-placing"></view>
-			<!-- 背景色区域 -->
-			<view class="titleNview-background" :style="{backgroundColor:titleNViewBackground}"></view>
-			<swiper class="carousel" circular @change="swiperChange">
-				<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item" @click="navToDetailPage({title: '轮播广告'})">
-					<image :src="item.src" />
-				</swiper-item>
-			</swiper>
-			<!-- 自定义swiper指示器 -->
-			<view class="swiper-dots">
-				<text class="num">{{swiperCurrent+1}}</text>
-				<text class="sign">/</text>
-				<text class="num">{{swiperLength}}</text>
-			</view>
-		</view>
-		<!-- 分类 -->
-		<view class="cate-section">
-			<view class="cate-item">
-				<image src="/static/temp/c3.png"></image>
-				<text>环球美食</text>
-			</view>
-			<view class="cate-item">
-				<image src="/static/temp/c5.png"></image>
-				<text>个护美妆</text>
-			</view>
-			<view class="cate-item">
-				<image src="/static/temp/c6.png"></image>
-				<text>营养保健</text>
-			</view>
-			<view class="cate-item">
-				<image src="/static/temp/c7.png"></image>
-				<text>家居厨卫</text>
-			</view>
-			<view class="cate-item">
-				<image src="/static/temp/c8.png"></image>
-				<text>速食生鲜</text>
-			</view>
-		</view>
-		
-		<view class="ad-1">
-			<image src="/static/temp/ad1.jpg" mode="scaleToFill"></image>
-		</view>
-		
-		<!-- 秒杀楼层 -->
-		<view class="seckill-section m-t">
-			<view class="s-header">
-				<image class="s-img" src="/static/temp/secskill-img.jpg" mode="widthFix"></image>
-				<text class="tip">8点场</text>
-				<text class="hour timer">07</text>
-				<text class="minute timer">13</text>
-				<text class="second timer">55</text>
-				<text class="yticon icon-you"></text>
-			</view>
-			<scroll-view class="floor-list" scroll-x>
-				<view class="scoll-wrapper">
-					<view 
-						v-for="(item, index) in goodsList" :key="index"
-						class="floor-item"
-						@click="navToDetailPage(item)"
-					>
-						<image :src="item.image" mode="aspectFill"></image>
-						<text class="title clamp">{{item.title}}</text>
-						<text class="price">￥{{item.price}}</text>
-					</view>
-				</view>
-			</scroll-view>
-		</view>
-		
-		<!-- 团购楼层 -->
-		<view class="f-header m-t">
-			<image src="/static/temp/h1.png"></image>
-			<view class="tit-box">
-				<text class="tit">精品团购</text>
-				<text class="tit2">Boutique Group Buying</text>
-			</view>
-			<text class="yticon icon-you"></text>
-		</view>
-		<view class="group-section">
-			<swiper class="g-swiper" :duration="500">
-				<swiper-item
-					class="g-swiper-item"
-					v-for="(item, index) in goodsList" :key="index"
-					v-if="index%2 === 0"
-					@click="navToDetailPage(item)"
-				>
-					<view class="g-item left">
-						<image :src="item.image" mode="aspectFill"></image>
-						<view class="t-box">
-							<text class="title clamp">{{item.title}}</text>
-							<view class="price-box">
-								<text class="price">￥{{item.price}}</text> 
-								<text class="m-price">￥188</text> 
-							</view>
-							
-							<view class="pro-box">
-							  	<view class="progress-box">
-							  		<progress percent="72" activeColor="#fa436a" active stroke-width="6" />
-							  	</view>
-								<text>6人成团</text>
-							</view>
-						</view>
-						            
-					</view>
-					<view class="g-item right">
-						<image :src="goodsList[index+1].image" mode="aspectFill"></image>
-						<view class="t-box">
-							<text class="title clamp">{{goodsList[index+1].title}}</text>
-							<view class="price-box">
-								<text class="price">￥{{goodsList[index+1].price}}</text> 
-								<text class="m-price">￥188</text> 
-							</view>
-							<view class="pro-box">
-							  	<view class="progress-box">
-							  		<progress percent="72" activeColor="#fa436a" active stroke-width="6" />
-							  	</view>
-								<text>10人成团</text>
-							</view>
-						</view>
-					</view>
-				</swiper-item>
-
-			</swiper>
-		</view>
-		
-		
-		
-		<!-- 分类推荐楼层 -->
-		<view class="f-header m-t">
-			<image src="/static/temp/h1.png"></image>
-			<view class="tit-box">
-				<text class="tit">分类精选</text>
-				<text class="tit2">Competitive Products For You</text>
-			</view>
-			<text class="yticon icon-you"></text>
-		</view>
-		<view class="hot-floor">
-			<view class="floor-img-box">
-				<image class="floor-img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553409398864&di=4a12763adccf229133fb85193b7cc08f&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201703%2F19%2F20170319150032_MNwmn.jpeg" mode="scaleToFill"></image>
-			</view>
-			<scroll-view class="floor-list" scroll-x>
-				<view class="scoll-wrapper">
-					<view 
-						v-for="(item, index) in goodsList" :key="index"
-						class="floor-item"
-						@click="navToDetailPage(item)"
-					>
-						<image :src="item.image" mode="aspectFill"></image>
-						<text class="title clamp">{{item.title}}</text>
-						<text class="price">￥{{item.price}}</text>
-					</view>
-					<view class="more">
-						<text>查看全部</text>
-						<text>More+</text>
-					</view>
-				</view>
-			</scroll-view>
-		</view>
-		<view class="hot-floor">
-			<view class="floor-img-box">
-				<image class="floor-img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553409984228&di=dee176242038c2d545b7690b303d65ea&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F5ef4da9f17faaf4612f0d5046f4161e556e9bbcfdb5b-rHjf00_fw658" mode="scaleToFill"></image>
-			</view>
-			<scroll-view class="floor-list" scroll-x>
-				<view class="scoll-wrapper">
-					<view 
-						v-for="(item, index) in goodsList" :key="index"
-						class="floor-item"
-						@click="navToDetailPage(item)"
-					>
-						<image :src="item.image3" mode="aspectFill"></image>
-						<text class="title clamp">{{item.title}}</text>
-						<text class="price">￥{{item.price}}</text>
-					</view>
-					<view class="more">
-						<text>查看全部</text>
-						<text>More+</text>
-					</view>
-				</view>
-			</scroll-view>
-		</view>
-		<view class="hot-floor">
-			<view class="floor-img-box">
-				<image class="floor-img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553409794730&di=12b840ec4f5748ef06880b85ff63e34e&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01dc03589ed568a8012060c82ac03c.jpg%40900w_1l_2o_100sh.jpg" mode="scaleToFill"></image>
-			</view>
-			<scroll-view class="floor-list" scroll-x>
-				<view class="scoll-wrapper">
-					<view 
-						v-for="(item, index) in goodsList" :key="index"
-						class="floor-item"
-						@click="navToDetailPage(item)"
-					>
-						<image :src="item.image2" mode="aspectFill"></image>
-						<text class="title clamp">{{item.title}}</text>
-						<text class="price">￥{{item.price}}</text>
-					</view>
-					<view class="more">
-						<text>查看全部</text>
-						<text>More+</text>
-					</view>
-				</view>
-			</scroll-view>
-		</view>
-
-		<!-- 猜你喜欢 -->
-		<view class="f-header m-t">
-			<image src="/static/temp/h1.png"></image>
-			<view class="tit-box">
-				<text class="tit">猜你喜欢</text>
-				<text class="tit2">Guess You Like It</text>
-			</view>
-			<text class="yticon icon-you"></text>
-		</view>
+			
 		
 		<view class="guess-section">
-			<view 
-				v-for="(item, index) in goodsList" :key="index"
-				class="guess-item"
-				@click="navToDetailPage(item)"
-			>
+			<view v-for="(item, index) in goodsList" :key="index"
+				class="guess-item"	@click="navToDetailPage(item)">
 				<view class="image-wrapper">
 					<image :src="item.image" mode="aspectFill"></image>
 				</view>
-				<text class="title clamp">{{item.title}}</text>
-				<text class="price">￥{{item.price}}</text>
+				<view class="des-list">
+					<view class="title">
+						<text class="title-name">亚龙·东朔空间</text>
+						<text class="taoshu">可租30套</text>
+					</view>
+					<text>14.00~239.00㎡</text>
+					<text>闵行区-莘庄</text>
+					<text>上海市闵行区莲花路2599号</text>
+					<text>自营</text>
+					<!-- <text class="title clamp">{{item.title}}</text>
+					<text class="price">￥{{item.price}}</text> -->
+				</view>
 			</view>
 		</view>
 		
@@ -701,22 +494,24 @@
 	/* 猜你喜欢 */
 	.guess-section{
 		display:flex;
-		flex-wrap:wrap;
+		flex-direction: column;
+		// flex-wrap:wrap;
 		padding: 0 30upx;
 		background: #fff;
 		.guess-item{
 			display:flex;
-			flex-direction: column;
-			width: 48%;
-			padding-bottom: 40upx;
-			&:nth-child(2n+1){
-				margin-right: 4%;
-			}
+			flex-direction: row;
+			width: 100%;
+			padding-bottom: 30upx;
+			// &:nth-child(2n+1){
+			// 	margin-right: 4%;
+			// }
 		}
 		.image-wrapper{
-			width: 100%;
-			height: 330upx;
+			width: 200upx;
+			height: 200upx;
 			border-radius: 3px;
+			margin-right: 15upx;
 			overflow: hidden;
 			image{
 				width: 100%;
@@ -724,12 +519,44 @@
 				opacity: 1;
 			}
 		}
+		.des-list{
+			display:flex;
+			// text-align:center;
+			// align-items: left;
+			// justify-content: center;
+			flex-direction: column;
+			// flex-shrink: 0;
+			width: 100%;
+			// height: 180upx;
+			border-radius: 6upx;
+			background: #f3f3f3;
+			font-size: $font-base;
+			color: $font-color-light;
+		}
 		.title{
+			// font-size: $font-lg;
+			// flex-direction: row;
+			// justify-content: space-between;
+			// color: $font-color-dark;
+			// line-height: 100upx;
+		}
+		.title-name{
 			font-size: $font-lg;
+			// flex-direction: row;
+			// justify-content: space-between;
+			text-align:left;
 			color: $font-color-dark;
-			line-height: 80upx;
+			line-height: 60upx;
+		}
+		.taoshu{
+			font-size: $font-lg;
+			text-align: righ;
+			color: $font-color-dark;
+			line-height: 60upx;
+			
 		}
 		.price{
+			flex-direction: row;
 			font-size: $font-lg;
 			color: $uni-color-primary;
 			line-height: 1;
