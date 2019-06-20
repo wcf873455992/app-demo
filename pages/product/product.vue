@@ -13,7 +13,6 @@
 				</swiper-item>
 			</swiper>
 		</view>
-		
 		<view class="introduce-section">
 			<text class="title">宇培·东硕空间</text>
 			<view class="price-box">
@@ -47,12 +46,9 @@
 				<view class="room-tile">					
 					<text class="">房源销控图		房源清单</text>
 					<text class="">更新时间：2019年6月19日      待租，已收定，已租</text>
-				<view>
+				</view>
 			</view>
 		</view>
-		
-		
-		
 	</view>
 </template>
 
