@@ -97,7 +97,7 @@
 				},
 				success: result => {
 					console.log(result);									
-					//返回的基本信息做本 地缓存
+					//返回的基本信息做本地缓存
 					let data = result.data;
 					if (data.code === 0) {									
 						// this.$api.msg('加载成功');
