@@ -69,7 +69,7 @@
 				// let headers = {};
 				uni.request({
 				  // url: this.$url + '/renren-api/api/login',//此处使用了全局变量拼接url（main.js文件中），关于全局变量官方问答里有
-					url: 'http://localhost:8001/renren-api/api/garden/list', //仅为示例，并非真实接口地址。
+					url: 'http://106.15.235.217:8001/renren-api/api/garden/list', //仅为示例，并非真实接口地址。
 					method: 'POST',//get或post
 					// headers: headers,
 					data: {

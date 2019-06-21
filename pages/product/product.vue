@@ -83,23 +83,13 @@
 			//接收传值,id里面放的是标题，因为 测试数据并没写id 
 			let id = options.id;
 			if(id){
-				this.$api.msg(`点击了${id}`);
+				// this.$api.msg(`点击了${id}`);
 			}
-			//规格 默认选中第一条
-			// this.specList.forEach(item=>{
-			// 	for(let cItem of this.specChildList){
-			// 		if(cItem.pid === item.id){
-			// 			this.$set(cItem, 'selected', true);
-			// 			this.specSelected.push(cItem);
-			// 			break; //forEach不能使用break
-			// 		}
-			// 	}
-			// })
 			// this.shareList = await this.$api.json('shareList');
 			let headers = {};
 			uni.request({
 			  // url: this.$url + '/renren-api/api/login',//此处使用了全局变量拼接url（main.js文件中），关于全局变量官方问答里有
-				url: 'http://localhost:8001/renren-api/api/garden/info/'+`${id}`, //仅为示例，并非真实接口地址。
+				url: 'http://106.15.235.217:8001/renren-api/api/garden/info/'+`${id}`, //仅为示例，并非真实接口地址。
 				method: 'POST',//get或post
 				headers: headers,
 				data: {
@@ -110,7 +100,7 @@
 					//返回的基本信息做本 地缓存
 					let data = result.data;
 					if (data.code === 0) {									
-						this.$api.msg('加载成功');
+						// this.$api.msg('加载成功');
 						// let gardeninfo = data.garden;
 						this.gardeninfo = data.garden;
 					} else {

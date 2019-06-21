@@ -117,8 +117,7 @@
 							
 						} else {
 							uni.removeStorageSync('token');	
-							// this.$api.msg(result.msg);
-							this.$api.msg('手机号或密码错误');
+							this.$api.msg(result.data.msg);
 							this.logining = false;
 						}
 					},
