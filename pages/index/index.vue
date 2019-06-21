@@ -16,13 +16,13 @@
 				</view>
 				<view class="des-list">
 					<view class="title">
-						<text class="title-name">亚龙·东朔空间</text>
-						<text class="taoshu">可租30套</text>
+						<text class="title-name">{{item.gardenName}}</text>
+						<text class="taoshu">---------可租{{item.vacantRoom}}套</text>
 					</view>
-					<text>14.00~239.00㎡</text>
-					<text>闵行区-莘庄</text>
-					<text>上海市闵行区莲花路2599号</text>
-					<text>自营</text>
+					<text>{{item.acreage}}</text>
+					<text>{{item.location}}</text>
+					<text>{{item.address}}</text>
+					<text>{{item.developer}}</text>
 					<!-- <text class="title clamp">{{item.title}}</text>
 					<text class="price">￥{{item.price}}</text> -->
 				</view>
@@ -43,7 +43,8 @@
 				swiperCurrent: 0,
 				swiperLength: 0,
 				carouselList: [],
-				goodsList: []
+				goodsList: [],
+				
 			};
 		},
 
@@ -61,8 +62,39 @@
 				this.swiperLength = carouselList.length;
 				this.carouselList = carouselList;
 				
-				let goodsList = await this.$api.json('goodsList');
-				this.goodsList = goodsList || [];
+				// let goodsList = await this.$api.json('goodsList');
+				// this.goodsList = goodsList || [];
+				
+				
+				// let headers = {};
+				uni.request({
+				  // url: this.$url + '/renren-api/api/login',//此处使用了全局变量拼接url（main.js文件中），关于全局变量官方问答里有
+					url: 'http://localhost:8001/renren-api/api/garden/list', //仅为示例，并非真实接口地址。
+					method: 'POST',//get或post
+					// headers: headers,
+					data: {
+						params: 1,
+					},
+					success: result => {
+						console.log(result);									
+						//返回的基本信息做本 地缓存
+						let data = result.data;
+						if (data.code === 0) {									
+							this.$api.msg('加载成功');
+							let goodsList = data.page.list;
+							this.goodsList = goodsList || [];
+						} else {
+							this.$api.msg(result.data.msg);
+						}
+					},
+					fail: () => {
+						uni.hideLoading();				
+						// uni.navigateBack();  	
+						this.$api.msg('网络连接失败');
+					},
+					complete: () => {},			   
+				});	
+				
 			},
 			//轮播图切换修改背景色
 			swiperChange(e) {
@@ -72,8 +104,8 @@
 			},
 			//详情页
 			navToDetailPage(item) {
-				//测试数据没有写id，用title代替
-				let id = item.title;
+				//测试数据没有写id，用title代替 
+				let id = item.gardenId;
 				uni.navigateTo({
 					url: `/pages/product/product?id=${id}`
 				})

@@ -14,15 +14,15 @@
 			</swiper>
 		</view>
 		<view class="introduce-section">
-			<text class="title">宇培·东硕空间</text>
+			<text class="title">{{gardeninfo.gardenName}}</text>
 			<view class="price-box">
-				<text class="price-tip">¥自营</text>
+				<text class="price-tip">¥{{gardeninfo.property}}</text>
 			</view>
 			<view class="bot-row">
-				<text>¥闵行区-虹桥</text>
-				<text>¥闵行区申昆路1899号</text>
-				<text>¥3.40-4.40元/㎡·天</text>
-				<text>¥97.00~261.00㎡</text>
+				<text>¥{{gardeninfo.location}}</text>
+				<text>¥{{gardeninfo.address}}</text>
+				<text>¥{{gardeninfo.prices}}</text>
+				<text>¥{{gardeninfo.acreage}}㎡</text>
 			</view>
 			<view class="eva-section">
 				<view class="e-header">
@@ -30,7 +30,7 @@
 				</view> 
 				<view class="eva-box">
 					<view class="right">
-						<text class="con">入住企业介绍</text>
+						<text class="con">{{gardeninfo.intro}}</text>
 					</view>
 				</view>
 				<view class="e-header">
@@ -38,7 +38,7 @@
 				</view> 
 				<view class="eva-box">
 					<view class="right">
-						<text class="con">楼盘特点介绍</text>
+						<text class="con">{{gardeninfo.characteristics}}</text>
 					</view>
 				</view>				
 			</view>
@@ -62,7 +62,7 @@
 			return {
 				specClass: 'none',
 				specSelected:[],
-				
+				gardeninfo: [],
 				favorite: true,
 				shareList: [],
 				imgList: [
@@ -80,24 +80,50 @@
 		},
 		async onLoad(options){
 			
-			//接收传值,id里面放的是标题，因为测试数据并没写id 
+			//接收传值,id里面放的是标题，因为 测试数据并没写id 
 			let id = options.id;
 			if(id){
 				this.$api.msg(`点击了${id}`);
 			}
-			
-			
 			//规格 默认选中第一条
-			this.specList.forEach(item=>{
-				for(let cItem of this.specChildList){
-					if(cItem.pid === item.id){
-						this.$set(cItem, 'selected', true);
-						this.specSelected.push(cItem);
-						break; //forEach不能使用break
+			// this.specList.forEach(item=>{
+			// 	for(let cItem of this.specChildList){
+			// 		if(cItem.pid === item.id){
+			// 			this.$set(cItem, 'selected', true);
+			// 			this.specSelected.push(cItem);
+			// 			break; //forEach不能使用break
+			// 		}
+			// 	}
+			// })
+			// this.shareList = await this.$api.json('shareList');
+			let headers = {};
+			uni.request({
+			  // url: this.$url + '/renren-api/api/login',//此处使用了全局变量拼接url（main.js文件中），关于全局变量官方问答里有
+				url: 'http://localhost:8001/renren-api/api/garden/info/'+`${id}`, //仅为示例，并非真实接口地址。
+				method: 'POST',//get或post
+				headers: headers,
+				data: {
+					// params: 1,
+				},
+				success: result => {
+					console.log(result);									
+					//返回的基本信息做本 地缓存
+					let data = result.data;
+					if (data.code === 0) {									
+						this.$api.msg('加载成功');
+						// let gardeninfo = data.garden;
+						this.gardeninfo = data.garden;
+					} else {
+						this.$api.msg(result.data.msg);
 					}
-				}
-			})
-			this.shareList = await this.$api.json('shareList');
+				},
+				fail: () => {
+					uni.hideLoading();				
+					// uni.navigateBack();  	
+					this.$api.msg('网络连接失败');
+				},
+				complete: () => {},			   
+			});	
 		},
 		methods:{			
 			
